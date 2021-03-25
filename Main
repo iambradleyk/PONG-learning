@@ -1,0 +1,74 @@
+#imports
+import pygame, sys
+
+#pygame initiation
+pygame.init()
+
+#colors
+red = (255,0,0)
+blue = (0,0,255)
+green = (0,255,0)
+black = (0,0,0)
+white = (255,255,255)
+
+#screen settings
+screen_width = 800
+screen_height = 600
+screen = pygame.display.set_mode((screen_width,screen_height))
+pygame.display.set_caption("P O N G")
+screen.fill(black)
+pygame.draw.line(screen,white,(400,0),(400,600),1)
+pygame.draw.line(screen,white,(0,75),(800,75),1)
+
+#game variables
+game_is_running = True
+player_1_score = 0
+player_2_score = 0
+
+
+#player rectangles
+class Paddle():
+    def __init__(self,x,y,width,height):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.paddle = pygame.draw.rect(screen,white,(self.x,self.y,self.width,self.height),0)
+
+    
+    #movement? need movement this doesn't work currently
+    def move_down(self):
+        self.y += 5
+    def move_up(self):
+        self.y -= 5
+
+    #def move_up(self):
+
+
+
+#pong ball
+
+#update score
+
+#draws players to screen
+player1 = Paddle(0,((screen_height-75)/2)+25,15,75)
+player2 = Paddle(785,((screen_height-75)/2)+25,15,75)
+
+
+
+
+#game loop
+while game_is_running:
+
+    key = pygame.key.get_pressed()
+    if key[pygame.K_LEFT]:
+        player1.move_down()
+    if key[pygame.K_RIGHT]:
+        player1.move_up()
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            game_is_running = False
+            sys.exit()
+            pygame.quit()
+    pygame.display.update()
+
